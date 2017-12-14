@@ -11,7 +11,3 @@ http.createServer(function (request, response) {
   router.user(request, response);
 }).listen(PORT);
 console.log('Server running at http://<workspace-url>/'); // for localhost, go to browser at 'localhost:3000'
-
-// Function that handles the reading of files and merge in value
-  // read from file and get a string
-    // merge values into string
