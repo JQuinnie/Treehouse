@@ -1,7 +1,7 @@
 var Profile = require('./profile.js');
 var renderer = require('./renderer.js');
 
-var commonHeaders = {'Content-Type': 'text/html'};
+var commonHeaders = {'Content-Type': 'text/html'}; //http://en.wikipedia.org/wiki/Internet_media_type
 
 // Handle HTTP route GET / and POST / i.e. Home
 function home(request, response) {
