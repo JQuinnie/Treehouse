@@ -1,5 +1,6 @@
 var Profile = require('./profile.js');
 var renderer = require('./renderer.js');
+var querystring = require('querystring');
 
 var commonHeaders = {'Content-Type': 'text/html'}; //http://en.wikipedia.org/wiki/Internet_media_type
 
@@ -7,15 +8,26 @@ var commonHeaders = {'Content-Type': 'text/html'}; //http://en.wikipedia.org/wik
 function home(request, response) {
   // if url == "/" && GET
   if (request.url === "/") {
+    if (request.method.toLowerCase() === "get") {
     // show search
     response.writeHead(200, commonHeaders);
     renderer.view('Header', {}, response);
     renderer.view('Search', {}, response);
     renderer.view('footer', {}, response);
     response.end();
+  } else {
+    // if url == "/" && POST
+
+    // get the post data from body
+    request.on('data', function(postBody) {
+      // extract the username
+      var query = querystring.parse(postBody.toString());
+      response.write(query.username);
+      response.end();
+        // redirect to /:username
+    });
   }
-  // if url == "/" && POST
-    // redirect to /:username
+}
 }
 
 // Handle HTTP route GET / :username i.e. /chalkers
