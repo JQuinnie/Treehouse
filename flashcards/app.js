@@ -9,8 +9,8 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 // make second page route
-app.get('/hello', (req, res) => {
-  res.send('<H1>Hello JavaScript Developer!</H1>');
+app.get('/cards', (req, res) => {
+  res.render('card', {prompt: "Who is buried in Grant's tomb?"});
 });
 // set up development server using the listen method with port number 3000
 app.listen(3000, () => {
