@@ -13,6 +13,14 @@ app.get('/', (req, res) => {
 app.get('/cards', (req, res) => {
   res.render('card', {prompt: "Who is buried in Grant's tomb?", hint: "Think about whoes tomb it is"});
 });
+
+app.get('/hello', (req, res) => {
+  res.render('hello');
+})
+
+app.post('/hello', (req, res) => {
+  res.render('hello');
+})
 // set up development server using the listen method with port number 3000
 app.listen(3000, () => {
   console.log('The application is running on localhost:3000');
