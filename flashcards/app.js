@@ -1,11 +1,13 @@
 // require the Express module and assign to variable express
 const express = require('express');
-// require middleware body-parser
+// require middleware body-parser and cookie-parser
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 // call express, express function returns an Express application, assigned to variable app
 const app = express();
-// tells express to use bodyparser
+// tells express to use both parsers
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 // tells express which template engine to use, default it will look into the views folder
 app.set('view engine', 'pug');
 // get the route, using render and pug
@@ -18,10 +20,11 @@ app.get('/cards', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-  res.render('hello');
+  res.render('hello', {name: req.cookies.username});
 })
 
 app.post('/hello', (req, res) => {
+  res.cookie('username', req.body.username);
   res.render('hello', {name: req.body.username});
 })
 // set up development server using the listen method with port number 3000
