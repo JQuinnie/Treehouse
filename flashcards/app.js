@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 // make second page route
 app.get('/cards', (req, res) => {
-  res.render('card', {prompt: "Who is buried in Grant's tomb?"});
+  res.render('card', {prompt: "Who is buried in Grant's tomb?", hint: "Think about whoes tomb it is"});
 });
 // set up development server using the listen method with port number 3000
 app.listen(3000, () => {
