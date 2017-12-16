@@ -12,7 +12,8 @@ app.use(cookieParser());
 app.set('view engine', 'pug');
 // get the route, using render and pug
 app.get('/', (req, res) => {
-  res.render('index');
+  const name = req.cookies.username;
+  res.render('index', {name}); //es 6 shortcut simplified key {name: name}
 });
 // make second page route
 app.get('/cards', (req, res) => {
@@ -20,12 +21,12 @@ app.get('/cards', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-  res.render('hello', {name: req.cookies.username});
+  res.render('hello');
 })
 
 app.post('/hello', (req, res) => {
   res.cookie('username', req.body.username);
-  res.render('hello', {name: req.body.username});
+  res.redirect('/');
 })
 // set up development server using the listen method with port number 3000
 app.listen(3000, () => {
