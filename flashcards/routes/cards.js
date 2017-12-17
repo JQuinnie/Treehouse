@@ -7,9 +7,17 @@ const cards = data.cards; // same way written as const {cards} = data
 
 // make second page route
 router.get('/:id', (req, res) => { // ':' tells express to treat this part of the url as a variable, stored in request object param property
-  res.render('card', {
-    prompt: cards[req.params.id].question, // using id property on params
-    hint: cards[req.params.id].hint});
+  const {side} = req.query;
+  const {id} = req.params;
+  const text = cards[id][side];
+  const {hint} = cards[id];
+
+  const templateData = {text};
+  // if statement for the hint to only show up when on the question side of the card
+  if (side === 'question') {
+    templateData.hint = hint;
+  }
+  res.render('card', templateData);
 });
 
 module.exports = router;
