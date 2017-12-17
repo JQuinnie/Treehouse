@@ -12,12 +12,12 @@ app.use(cookieParser());
 app.set('view engine', 'pug');
 
 // middleware runs when request comes into app
-app.use((req, res, next) => {
-  console.log('Hello');
-  const err = new Error('Oh noes!'); // introducing an error
-  err.status = 500;
-  next(err); // a way to end the middleware function, by calling next or sending a response
-});
+// app.use((req, res, next) => {
+//   console.log('Hello');
+//   const err = new Error('Oh noes!'); // introducing an error
+//   err.status = 500;
+//   next(err); // a way to end the middleware function, by calling next or sending a response
+// });
 
 // get the route, using render and pug
 app.get('/', (req, res) => {
@@ -52,11 +52,18 @@ app.post('/goodbye', (req, res) => {
   res.redirect('/hello'); // redirect to the hello route
 });
 
+// middleware file not found error
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
 // middleware error handler
 app.use((err, req, res, next) => {
   res.locals.error = err;
   res.status(err.status);
-  res.render('error', err);
+  res.render('error');
 });
 
 // set up development server using the listen method with port number 3000
