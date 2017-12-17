@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   const numberOfCards = cards.length;
   const flashcardID = Math.floor(Math.random() * numberOfCards);
   res.redirect(`/cards/${flashcardID}`);
-})
+});
 
 // make second page route
 router.get('/:id', (req, res) => { // ':' tells express to treat this part of the url as a variable, stored in request object param property
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => { // ':' tells express to treat this part of th
   const {id} = req.params;
 
   if(!side) {
-    res.redirect(`/cards/${id}?side=question`) // if side does not exist on the card number, it will redirect
+    return res.redirect(`/cards/${id}?side=question`) // if side does not exist on the card number, it will redirect
   }
   const name = req.cookies.username;
   const text = cards[id][side];
