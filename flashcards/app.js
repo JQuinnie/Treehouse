@@ -11,6 +11,13 @@ app.use(cookieParser());
 // tells express which template engine to use, default it will look into the views folder
 app.set('view engine', 'pug');
 
+// middleware import router file from index.js
+const mainRoutes = require('./routes'); // because folder has index.js file we dont need to refer ./routes/index.js
+const cardRoutes = require('./routes/cards');
+
+app.use(mainRoutes); // declare middleware
+app.use('/cards', cardRoutes);
+
 // middleware runs when request comes into app
 // app.use((req, res, next) => {
 //   console.log('Hello');
@@ -18,39 +25,6 @@ app.set('view engine', 'pug');
 //   err.status = 500;
 //   next(err); // a way to end the middleware function, by calling next or sending a response
 // });
-
-// get the route, using render and pug
-app.get('/', (req, res) => {
-  const name = req.cookies.username;
-  if (name) {
-    res.render('index', {name}); //es 6 shortcut simplified key {name: name}
-  } else {
-    res.redirect('/hello'); // if name does not exist
-  }
-});
-// make second page route
-app.get('/cards', (req, res) => {
-  res.render('card', {prompt: "Who is buried in Grant's tomb?", hint: "Think about whoes tomb it is"});
-});
-
-app.get('/hello', (req, res) => {
-  const name = req.cookies.username;
-  if (name) {
-    res.redirect('/'); // if name is present, redirect to indext route
-  } else {
-    res.render('hello'); // otherwise render and go to hello form
-  }
-})
-
-app.post('/hello', (req, res) => {
-  res.cookie('username', req.body.username);
-  res.redirect('/');
-});
-// Goodbye page to clear cookie and redirect
-app.post('/goodbye', (req, res) => {
-  res.clearCookie('username'); // clears cookie of username
-  res.redirect('/hello'); // redirect to the hello route
-});
 
 // middleware file not found error
 app.use((req, res, next) => {
