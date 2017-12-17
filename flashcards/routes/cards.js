@@ -12,10 +12,15 @@ router.get('/:id', (req, res) => { // ':' tells express to treat this part of th
   const text = cards[id][side];
   const {hint} = cards[id];
 
-  const templateData = {text};
-  // if statement for the hint to only show up when on the question side of the card
+  const templateData = {id, text};
+  // if statement for the hint to only show up when on the question side of the card, switch between the sides to show
   if (side === 'question') {
     templateData.hint = hint;
+    templateData.sideToShow = 'answer';
+    templateData.sideToShowDisplay = 'Answer';
+  } else if (side === 'answer') {
+    templateData.sideToShow = 'question';
+    templateData.sideToShowDisplay = 'Question';
   }
   res.render('card', templateData);
 });
