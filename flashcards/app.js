@@ -8,6 +8,7 @@ const app = express();
 // tells express to use both parsers
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use('/static', express.static('public')); // adding public folder to access static files
 // tells express which template engine to use, default it will look into the views folder
 app.set('view engine', 'pug');
 
