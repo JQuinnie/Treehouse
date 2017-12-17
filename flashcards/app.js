@@ -10,6 +10,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 // tells express which template engine to use, default it will look into the views folder
 app.set('view engine', 'pug');
+
+// middleware runs when request comes into app
+app.use((req, res, next) => {
+  console.log('Hello');
+  const err = new Error('Oh noes!'); // introducing an error
+  err.status = 500;
+  next(err); // a way to end the middleware function, by calling next or sending a response
+});
+
 // get the route, using render and pug
 app.get('/', (req, res) => {
   const name = req.cookies.username;
@@ -42,6 +51,14 @@ app.post('/goodbye', (req, res) => {
   res.clearCookie('username'); // clears cookie of username
   res.redirect('/hello'); // redirect to the hello route
 });
+
+// middleware error handler
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  res.status(err.status);
+  res.render('error', err);
+});
+
 // set up development server using the listen method with port number 3000
 app.listen(3000, () => {
   console.log('The application is running on localhost:3000');
