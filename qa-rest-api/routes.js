@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 });
 
 // POST /questions
-// reoute for creating questions
+// route for creating questions
 router.post('/', function(req, res) {
   res.json({
     response: 'You sent me a POST request',
@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 });
 
 // GET /questions/:qID
-// reoute for creating questions
+// route for getting questions
 router.get('/:qID', function(req, res) {
   res.json({
     response: 'You sent me a GET request for ID ' + req.params.id
@@ -60,7 +60,15 @@ router.delete('/:qID/answers/:aID', function(req, res) {
 // POST /questions/:qID/answers/:aID/vote-up
 // POST /questions/:qID/answers/:aID/vote-down
 // Vote on a specific answer
-router.post('/:qID/answers/:aID/vote-:dir', function(req, res) { //dir = direction
+router.post('/:qID/answers/:aID/vote-:dir', function(req, res, next) {
+  if(req.params.dir.search(/^(up|down)$/) === -1) { // search on up or down
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  } else {
+    next(); // next function to execute
+  }
+}, function(req, res) { //dir = direction
   res.json({
     response: 'You sent me a POST request to /vote-' + req.params.dir,
     questionId: req.params.qID,
