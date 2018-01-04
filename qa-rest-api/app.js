@@ -2,9 +2,13 @@
 // specify dependencies
 const express = require('express');
 const app = express();
+const jsonParser = require('body-parser').json; // function that will return middleware
 
-// adding middleware
+app.use(jsonParser());
+
+// adding middleware to extend functionality of express app
 app.use(function(req, res, next) {
+  req.body;
   next();
 });
 
