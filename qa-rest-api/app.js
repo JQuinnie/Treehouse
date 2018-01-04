@@ -2,9 +2,12 @@
 // specify dependencies
 const express = require('express');
 const app = express();
+const routes = require('./routes.js');
 const jsonParser = require('body-parser').json; // function that will return middleware
 
 app.use(jsonParser());
+
+app.use('/questions', routes); // setting up route
 
 // adding middleware to extend functionality of express app
 app.use(function(req, res, next) {
