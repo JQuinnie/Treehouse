@@ -4,7 +4,9 @@ const express = require('express');
 const app = express();
 const routes = require('./routes.js');
 const jsonParser = require('body-parser').json; // function that will return middleware
+const logger = require('morgan'); // middleware logger
 
+app.use(logger('dev'));
 app.use(jsonParser());
 
 app.use('/questions', routes); // setting up route
