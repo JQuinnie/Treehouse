@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 // create mongoose schema object
 var UserSchema = new mongoose.Schema({
@@ -22,6 +23,18 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   }
+});
+
+// hash password before saving to database
+UserSchema.pre('save', function (next) {
+  var user = this; // holds user object and its data
+  bcrypt.hash(user.password, 10, function (err, hash) {
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  })
 });
 
 var User = mongoose.model('User', UserSchema);
