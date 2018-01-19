@@ -48,7 +48,7 @@ db.once('open', function () {
     next();
   });
 
-  // static method
+  // static method, called by a model
   AnimalSchema.statics.findSize = function (size, callback) {
     // this == Animal
     return this.find({
@@ -56,7 +56,7 @@ db.once('open', function () {
     }, callback);
   }
 
-  // instance method
+  // instance method, called by a document
   AnimalSchema.methods.findSameColor = function (callback) {
     //this == document
     return this.model('Animal').find({
