@@ -5,6 +5,20 @@ const router = express.Router();
 // import question model
 const Question = require('./models').Question;
 
+// trigger handler, preload the question document in the handler so it will be present on any matching route
+router.param('qID', function (req, res, next, id) {
+  Question.findById(req.params.qID, function (err, doc) {
+    if (err) return next(err);
+    if (!doc) {
+      err = new Error('Not Found');
+      err.status = 404;
+      return next(err);
+    }
+    req.question = doc;
+    return next();
+  });
+});
+
 // GET /questions
 // route for questions collection
 router.get('/', function (req, res, next) {
@@ -32,9 +46,7 @@ router.post('/', function (req, res, next) {
 // GET /questions/:qID
 // route for getting questions
 router.get('/:qID', function (req, res) {
-  res.json({
-    response: 'You sent me a GET request for ID ' + req.params.id
-  });
+  res.json(req.question);
 });
 
 // POST /questions/:qID/answers
