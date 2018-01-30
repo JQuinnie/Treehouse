@@ -19,6 +19,16 @@ router.param('qID', function (req, res, next, id) {
   });
 });
 
+router.param('aID', function (req, res, next, id) {
+  req.answer = req.question.answers.id(id);
+  if (!req.answer) {
+    err = new Error('Not Found');
+    err.status = 404;
+    return next(err);
+  }
+  next();
+});
+
 // GET /questions
 // route for questions collection
 router.get('/', function (req, res, next) {
@@ -51,11 +61,12 @@ router.get('/:qID', function (req, res) {
 
 // POST /questions/:qID/answers
 // reoute for creating an answer
-router.post('/:qID/answers', function (req, res) {
-  res.json({
-    response: 'You sent me a POST request to /answers',
-    questionId: req.params.qID,
-    body: req.body
+router.post('/:qID/answers', function (req, res, next) {
+  req.question.answers.push(req.body);
+  req.question.save(function (err, question) {
+    if (err) return next(err);
+    res.status(201);
+    res.json(question);
   });
 });
 
