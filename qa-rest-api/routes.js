@@ -73,21 +73,20 @@ router.post('/:qID/answers', function (req, res, next) {
 // PUT /questions/:qID/answers/:aID
 // edit a specific answer
 router.put('/:qID/answers/:aID', function (req, res) {
-  res.json({
-    response: 'You sent me a PUT request to /answers',
-    questionId: req.params.qID,
-    answerId: req.params.aID,
-    body: req.body
+  req.answer.update(req.body, function (err, result) {
+    if (err) return next(err);
+    res.json(result);
   });
 });
 
 // DELETE /questions/:qID/answers/:aID
 // delete a specific answer
 router.delete('/:qID/answers/:aID', function (req, res) {
-  res.json({
-    response: 'You sent me a DELETE request to /answers',
-    questionId: req.params.qID,
-    answerId: req.params.aID,
+  req.answer.remove(function (err) {
+    req.question.save(function (err, question) {
+      if (err) return next(err);
+      res.json(question);
+    });
   });
 });
 
