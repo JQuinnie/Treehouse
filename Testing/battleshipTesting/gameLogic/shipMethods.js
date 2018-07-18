@@ -16,6 +16,8 @@ function checkForShip(player, coordinates) {
 
     if (!shipPresent) {
       return false;
+    } else {
+      return true;
     }
   }
 }
