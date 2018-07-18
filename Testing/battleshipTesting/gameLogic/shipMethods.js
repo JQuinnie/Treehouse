@@ -14,12 +14,12 @@ function checkForShip(player, coordinates) {
       );
     })[0]; // be a coordinate if only a match, first unmatch will be undefined with empty array
 
-    if (!shipPresent) {
-      return false;
-    } else {
+    if (shipPresent) {
       return true;
     }
   }
+  // want to complete loop to make sure it runs through all ship before return false
+  return false;
 }
 
 module.exports.checkForShip = checkForShip;
