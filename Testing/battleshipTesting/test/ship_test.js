@@ -65,3 +65,22 @@ describe("checkForShip", function() {
     expect(checkForShip(player, [9, 9])).to.be.false;
   });
 });
+
+// check for damage on ship
+describe("damageShip", function() {
+  const damageShip = require("../gameLogic/shipMethods").damageShip;
+
+  it("should register damage on a given ship at a given location", function() {
+    let ship = {
+      locations: [[0, 0]],
+      damage: []
+    };
+
+    // make sure damage ship should not have an empty damage array
+    damageShip(ship, [0, 0]);
+
+    expect(ship.damage).to.not.be.empty;
+    // check first element of damage array to look like what is specified in equal()
+    expect(ship.damage[0]).to.deep.equal([0, 0]);
+  });
+});
