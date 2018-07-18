@@ -1,7 +1,11 @@
 const expect = require("chai").expect;
 
 function titleCase(title) {
-  return title[0].toUpperCase() + title.substring(1);
+  let word = title.split(" ");
+  let titleCaseWord = word.map(function(eachWord) {
+    return eachWord[0].toUpperCase() + eachWord.substring(1);
+  });
+  return titleCaseWord.join(" ");
 }
 
 expect(titleCase("the shawshank redemption")).to.be.a("string");
