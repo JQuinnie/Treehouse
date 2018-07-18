@@ -11,6 +11,6 @@ function titleCase(title) {
 expect(titleCase("the shawshank redemption")).to.be.a("string");
 expect(titleCase("a")).to.equal("A");
 expect(titleCase("titanic")).to.equal("Titanic");
-// expect(titleCase("the shawshank redemption")).to.equal(
-//   "The Shawshank Redemption"
-// );
+expect(titleCase("the shawshank redemption")).to.equal(
+  "The Shawshank Redemption"
+);
