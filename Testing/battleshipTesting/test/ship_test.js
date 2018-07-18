@@ -25,7 +25,7 @@ describe("checkForShip", function() {
         }
       ]
     };
-    expect(checkForShip(player, [0, 0])).to.be.true;
+    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
   });
 
   // bigger ship
@@ -37,8 +37,8 @@ describe("checkForShip", function() {
         }
       ]
     };
-    expect(checkForShip(player, [0, 0])).to.be.true;
-    expect(checkForShip(player, [0, 1])).to.be.true;
+    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
     expect(checkForShip(player, [9, 9])).to.be.false;
   });
 
@@ -57,11 +57,11 @@ describe("checkForShip", function() {
         }
       ]
     };
-    expect(checkForShip(player, [0, 0])).to.be.true;
-    expect(checkForShip(player, [0, 1])).to.be.true;
-    expect(checkForShip(player, [1, 0])).to.be.true;
-    expect(checkForShip(player, [1, 1])).to.be.true;
-    expect(checkForShip(player, [2, 3])).to.be.true;
+    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [1, 0])).to.deep.equal(player.ships[1]);
+    expect(checkForShip(player, [1, 1])).to.deep.equal(player.ships[1]);
+    expect(checkForShip(player, [2, 3])).to.deep.equal(player.ships[2]);
     expect(checkForShip(player, [9, 9])).to.be.false;
   });
 });
@@ -82,5 +82,42 @@ describe("damageShip", function() {
     expect(ship.damage).to.not.be.empty;
     // check first element of damage array to look like what is specified in equal()
     expect(ship.damage[0]).to.deep.equal([0, 0]);
+  });
+});
+
+// ship fire function
+describe("fire", function() {
+  const fire = require("../gameLogic/shipMethods").fire;
+
+  it("should record damage on the given players ship at a given coordinate", function() {
+    let player = {
+      ships: [
+        {
+          locations: [[0, 0]],
+          damage: []
+        }
+      ]
+    };
+
+    fire(player, [0, 0]);
+
+    // fire at location that is occupied, ship should take damage
+    expect(player.ships[0].damage[0]).to.deep.equal([0, 0]);
+  });
+
+  it("should NOT record damage if there is no ship at my coordinates", function() {
+    let player = {
+      ships: [
+        {
+          locations: [[0, 0]],
+          damage: []
+        }
+      ]
+    };
+
+    fire(player, [9, 9]);
+
+    // fire at location if empty then dont take damage
+    expect(player.ships[0].damage).to.be.empty;
   });
 });

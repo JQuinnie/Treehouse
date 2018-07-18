@@ -15,7 +15,7 @@ function checkForShip(player, coordinates) {
     })[0]; // be a coordinate if only a match, first unmatch will be undefined with empty array
 
     if (shipPresent) {
-      return true;
+      return ship;
     }
   }
   // want to complete loop to make sure it runs through all ship before return false
@@ -26,5 +26,15 @@ function damageShip(ship, coordinates) {
   ship.damage.push(coordinates);
 }
 
+function fire(player, coordinates) {
+  // check for a ship
+  let ship = checkForShip(player, coordinates);
+
+  if (ship) {
+    damageShip(ship, coordinates);
+  }
+}
+
 module.exports.checkForShip = checkForShip;
 module.exports.damageShip = damageShip;
+module.exports.fire = fire;
