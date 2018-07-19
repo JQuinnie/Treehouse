@@ -73,6 +73,7 @@ describe("fire", function() {
   const fire = require("../gameLogic/shipMethods").fire;
   let player;
 
+  // reset the object before each test
   beforeEach(function() {
     player = {
       ships: [
@@ -83,11 +84,11 @@ describe("fire", function() {
       ]
     };
   });
-
+  // clean the test afterwards
   after(function() {
     console.log("Entire test suite complted");
   });
-
+  // clean each afterwards
   afterEach(function() {
     console.log("one unit test completed");
   });
