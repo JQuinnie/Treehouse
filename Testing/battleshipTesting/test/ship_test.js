@@ -5,7 +5,7 @@ describe("checkForShip", function() {
   const checkForShip = require("../gameLogic/shipMethods").checkForShip;
   let player;
 
-  before(function(){
+  before(function() {
     player = {
       ships: [
         {
@@ -19,7 +19,7 @@ describe("checkForShip", function() {
         }
       ]
     };
-  })
+  });
 
   // no ship
   it("should correctly report no ship at a given players coordinate", function() {
@@ -71,9 +71,10 @@ describe("damageShip", function() {
 // ship fire function
 describe("fire", function() {
   const fire = require("../gameLogic/shipMethods").fire;
+  let player;
 
-  it("should record damage on the given players ship at a given coordinate", function() {
-    let player = {
+  beforeEach(function() {
+    player = {
       ships: [
         {
           locations: [[0, 0]],
@@ -81,25 +82,16 @@ describe("fire", function() {
         }
       ]
     };
+  });
 
+  it("should record damage on the given players ship at a given coordinate", function() {
     fire(player, [0, 0]);
-
     // fire at location that is occupied, ship should take damage
     expect(player.ships[0].damage[0]).to.deep.equal([0, 0]);
   });
 
   it("should NOT record damage if there is no ship at my coordinates", function() {
-    let player = {
-      ships: [
-        {
-          locations: [[0, 0]],
-          damage: []
-        }
-      ]
-    };
-
     fire(player, [9, 9]);
-
     // fire at location if empty then dont take damage
     expect(player.ships[0].damage).to.be.empty;
   });
