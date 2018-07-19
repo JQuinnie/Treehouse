@@ -84,6 +84,14 @@ describe("fire", function() {
     };
   });
 
+  after(function() {
+    console.log("Entire test suite complted");
+  });
+
+  afterEach(function() {
+    console.log("one unit test completed");
+  });
+
   it("should record damage on the given players ship at a given coordinate", function() {
     fire(player, [0, 0]);
     // fire at location that is occupied, ship should take damage
