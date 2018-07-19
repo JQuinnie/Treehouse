@@ -3,47 +3,9 @@ const expect = require("chai").expect;
 // set up new suite for function
 describe("checkForShip", function() {
   const checkForShip = require("../gameLogic/shipMethods").checkForShip;
+  let player;
 
-  // no ship
-  it("should correctly report no ship at a given players coordinate", function() {
-    player = {
-      ships: [
-        {
-          locations: [[0, 0]]
-        }
-      ]
-    };
-    expect(checkForShip(player, [9, 9])).to.be.false;
-  });
-
-  // a ship
-  it("should correctly report a ship located at a given players coordinate", function() {
-    player = {
-      ships: [
-        {
-          locations: [[0, 0]]
-        }
-      ]
-    };
-    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
-  });
-
-  // bigger ship
-  it("should handle ships located at more than one coordinate", function() {
-    player = {
-      ships: [
-        {
-          locations: [[0, 0], [0, 1]]
-        }
-      ]
-    };
-    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
-    expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
-    expect(checkForShip(player, [9, 9])).to.be.false;
-  });
-
-  // many ships
-  it("should handle checking multiple ships", function() {
+  before(function(){
     player = {
       ships: [
         {
@@ -57,6 +19,27 @@ describe("checkForShip", function() {
         }
       ]
     };
+  })
+
+  // no ship
+  it("should correctly report no ship at a given players coordinate", function() {
+    expect(checkForShip(player, [9, 9])).to.be.false;
+  });
+
+  // a ship
+  it("should correctly report a ship located at a given players coordinate", function() {
+    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
+  });
+
+  // bigger ship
+  it("should handle ships located at more than one coordinate", function() {
+    expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [9, 9])).to.be.false;
+  });
+
+  // many ships
+  it("should handle checking multiple ships", function() {
     expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
     expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
     expect(checkForShip(player, [1, 0])).to.deep.equal(player.ships[1]);
