@@ -44,3 +44,6 @@ names.forEach((name) => {
 });
 
 console.log(sNames);
+
+// introducing index to forEach
+names.forEach((name, index) => console.log(`${index + 1}) ${name}`));
