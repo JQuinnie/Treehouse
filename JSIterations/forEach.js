@@ -20,3 +20,14 @@ fruits.forEach((fruit) => {
 });
 
 console.log(capFruits);
+
+// sum of prices
+const prices = [6.75, 3.1, 4.0, 8.12];
+
+let totalPrice = 0;
+
+prices.forEach((price) => {
+  totalPrice += price;
+});
+
+console.log(totalPrice);
