@@ -31,3 +31,16 @@ prices.forEach((price) => {
 });
 
 console.log(totalPrice);
+
+// only names starting with 'S'
+const names = ['Selma', 'Ted', 'Mike', 'Sam', 'Sharon', 'Marvin'];
+
+const sNames = [];
+
+names.forEach((name) => {
+  if (name.charAt(0).toLowerCase() === 's') {
+    sNames.push(name);
+  }
+});
+
+console.log(sNames);
