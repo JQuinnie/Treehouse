@@ -19,3 +19,20 @@ const strings = ["1", "2", "3", "4", "5"];
 const nums = strings.map(string => parseInt(string, 10));
 
 console.log(nums);
+
+// refactor code below
+// const fruits = ['apple', 'pear', 'cherry'];
+
+// let capitalizedFruits = [];
+
+// fruits.forEach(fruit => {
+//   let capitalizedFruit = fruit.toUpperCase();
+//   capitalizedFruits.push(capitalizedFruit);
+// });
+
+// console.log(capitalizedFruits);
+
+const fruits = ["apple", "pear", "cherry"];
+const capFruits = fruits.map(fruit => fruit.toUpperCase());
+
+console.log(capFruits);
