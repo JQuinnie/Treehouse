@@ -36,3 +36,9 @@ const fruits = ["apple", "pear", "cherry"];
 const capFruits = fruits.map(fruit => fruit.toUpperCase());
 
 console.log(capFruits);
+
+// Using .map for prices
+const prices = [5, 4.23, 6.4, 8.09, 3.2];
+const formatPrices = prices.map(price => `$${price.toFixed(2)}`);
+
+console.log(formatPrices);
