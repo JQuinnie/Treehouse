@@ -39,6 +39,7 @@ console.log(capFruits);
 
 // Using .map for prices
 const prices = [5, 4.23, 6.4, 8.09, 3.2];
-const formatPrices = prices.map(price => `$${price.toFixed(2)}`);
+const formatPrices = price => `$${price.toFixed(2)}`;
+const displayPrices = prices.map(formatPrices);
 
-console.log(formatPrices);
+console.log(displayPrices);
