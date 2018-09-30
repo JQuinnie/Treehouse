@@ -43,3 +43,17 @@ const formatPrices = price => `$${price.toFixed(2)}`;
 const displayPrices = prices.map(formatPrices);
 
 console.log(displayPrices);
+
+// Use map to abbr days of the Week
+const daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+const abbreviatedDays = daysOfWeek.map(day => day.slice(0, 3));
+
+console.log(abbreviatedDays);
