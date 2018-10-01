@@ -82,3 +82,16 @@ const totalCost = products
   .toFixed(2);
 
 console.log(totalCost);
+
+// using the reduce method to flatten array
+const movies = [
+  ["The Day the Earth Stood Still", "Superman", "Ghostbusters"],
+  ["Finding Dory"],
+  ["Jaws", "On the Waterfront"]
+];
+
+const flatMovies = movies.reduce(
+  (arr, innerMovies) => [...arr, ...innerMovies],
+  []
+);
+console.log(flatMovies);
