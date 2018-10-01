@@ -53,3 +53,24 @@ const users2 = [
 const nameAges = users2.filter(user => user.age >= 30).map(user => user.name);
 
 console.log(nameAges);
+
+// combining two methods using .filter and .reduce
+const products = [
+  { name: "hard drive", price: 59.99 },
+  { name: "lighbulbs", price: 2.59 },
+  { name: "paper towels", price: 6.99 },
+  { name: "flatscreen monitor", price: 159.99 },
+  { name: "cable ties", price: 19.99 },
+  { name: "ballpoint pens", price: 4.49 }
+];
+
+const newProd = products
+  .filter(product => product.price < 10)
+  .reduce((high, cur) => {
+    if (high.price > cur.price) {
+      return high;
+    }
+    return cur;
+  });
+
+console.log(newProd);
