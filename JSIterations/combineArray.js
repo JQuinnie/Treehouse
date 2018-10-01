@@ -74,3 +74,11 @@ const newProd = products
   });
 
 console.log(newProd);
+
+// another example of combo methods to return total price over $10
+const totalCost = products
+  .filter(prod => prod.price > 10)
+  .reduce((sum, prod) => sum + prod.price, 0)
+  .toFixed(2);
+
+console.log(totalCost);
