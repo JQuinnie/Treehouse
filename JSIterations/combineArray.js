@@ -22,3 +22,11 @@ const userAge = users.map(user => `${user.name} is ${user.age} years old`);
 
 console.log(newUsers);
 console.log(userAge);
+
+// working with reduce on objects
+const userObject = users.reduce((userObject, user) => {
+  userObject[user.name] = user.age;
+  return userObject;
+}, {});
+
+console.log(userObject);
