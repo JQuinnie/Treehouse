@@ -57,3 +57,35 @@ const daysOfWeek = [
 const abbreviatedDays = daysOfWeek.map(day => day.slice(0, 3));
 
 console.log(abbreviatedDays);
+
+// Use reduce in place of forEach
+const prices2 = [6.75, 3.1, 4.0, 8.12];
+// // previous code
+// let total = 0;
+
+// prices.forEach(price => {
+//   total += price;
+// });
+const totalPrice = prices2.reduce((sum, price) => sum + price, 0);
+
+console.log(totalPrice);
+
+// Use reduce to count number of occurance
+const names2 = [
+  "Gary",
+  "Pasan",
+  "Gabe",
+  "Treasure",
+  "Gengis",
+  "Gladys",
+  "Tony"
+];
+
+const gCount = names2.reduce((count, name) => {
+  if (name[0] === "G") {
+    return count + 1;
+  }
+  return count;
+}, 0);
+
+console.log(gCount);
