@@ -30,3 +30,12 @@ const userObject = users.reduce((userObject, user) => {
 }, {});
 
 console.log(userObject);
+
+// combining two methods using .filter and .map
+const userNames = ["Samir", "Angela", "Beatrice", "Shaniqua", "Marvin", "Sean"];
+
+const userObjects = userNames
+  .filter(name => name.charAt(0) === "S")
+  .map(name => ({ name })); // same as {name: name}
+
+console.log(userObjects);
