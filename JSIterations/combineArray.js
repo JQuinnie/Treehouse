@@ -11,8 +11,14 @@ const unique = numbers.filter((number, index, array) => {
 console.log(unique);
 
 // working with objects in array
-const users = [{ name: "Samir" }, { name: "Angela" }, { name: "Beatrice" }];
+const users = [
+  { name: "Samir", age: 27 },
+  { name: "Angela", age: 33 },
+  { name: "Beatrice", age: 42 }
+];
 
 const newUsers = users.filter(user => user.name !== "Samir");
+const userAge = users.map(user => `${user.name} is ${user.age} years old`);
 
 console.log(newUsers);
+console.log(userAge);
