@@ -39,3 +39,17 @@ const userObjects = userNames
   .map(name => ({ name })); // same as {name: name}
 
 console.log(userObjects);
+
+// combining two methods using .filter and .map on array of objects
+const users2 = [
+  { name: "Samir", age: 27 },
+  { name: "Angela", age: 33 },
+  { name: "Beatrice", age: 42 },
+  { name: "Shaniqua", age: 30 },
+  { name: "Marvin", age: 23 },
+  { name: "Sean", age: 47 }
+];
+
+const nameAges = users2.filter(user => user.age >= 30).map(user => user.name);
+
+console.log(nameAges);
