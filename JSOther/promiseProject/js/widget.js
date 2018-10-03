@@ -1,24 +1,3 @@
-const getJSON = url => new Promise((resolve, reject) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.onreadystatechange = handleResponse;
-  xhr.onerror = (error) => {
-    reject(error);
-  };
-  xhr.send();
-
-  function handleResponse() {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        const employees = JSON.parse(xhr.responseText);
-        resolve(employees);
-      } else {
-        reject(this.statusText);
-      }
-    }
-  }
-});
-
 // takes in employees and returns list items
 function generatListItems(employees) {
   let statusHTML = '';
@@ -44,6 +23,26 @@ function generateUnorderedList(listItems) {
 function addEmployeesToPage(unorderedList) {
   document.getElementById('employeeList').innerHTML = unorderedList;
 }
+const getJSON = url => new Promise((resolve, reject) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.onreadystatechange = handleResponse;
+  xhr.onerror = (error) => {
+    reject(error);
+  };
+  xhr.send();
+
+  function handleResponse() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        const employees = JSON.parse(xhr.responseText);
+        resolve(employees);
+      } else {
+        reject(this.statusText);
+      }
+    }
+  }
+});
 
 const ajaxPromise = getJSON('../data/employees.json');
 
